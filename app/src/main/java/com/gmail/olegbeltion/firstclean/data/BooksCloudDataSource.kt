@@ -1,5 +1,6 @@
 package com.gmail.olegbeltion.firstclean.data
 
+import com.gmail.olegbeltion.firstclean.core.Book
 import com.gmail.olegbeltion.firstclean.data.net.BookServices
 import com.gmail.olegbeltion.firstclean.data.net.BookCloud
 
