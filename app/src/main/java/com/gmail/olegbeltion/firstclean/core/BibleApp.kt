@@ -10,6 +10,11 @@ import com.gmail.olegbeltion.firstclean.data.cache.BooksCacheMapper
 import com.gmail.olegbeltion.firstclean.data.cache.RealmProvider
 import com.gmail.olegbeltion.firstclean.data.net.BookCloudMapper
 import com.gmail.olegbeltion.firstclean.data.net.BookServices
+import com.gmail.olegbeltion.firstclean.domain.BaseBooksDomainToUiMapper
+import com.gmail.olegbeltion.firstclean.domain.BooksInteractor
+import com.gmail.olegbeltion.firstclean.presentation.BooksCommunication
+import com.gmail.olegbeltion.firstclean.presentation.MainViewModel
+import com.gmail.olegbeltion.firstclean.presentation.ResourcesProvider
 import retrofit2.Retrofit
 
 class BibleApp : Application() {
@@ -17,6 +22,8 @@ class BibleApp : Application() {
     private companion object {
         private const val BASE_URL = "https://bible-go-api.rkeplin.com/v1/"
     }
+
+    lateinit var mainViewModel: MainViewModel
 
     override fun onCreate() {
         super.onCreate()
@@ -38,6 +45,13 @@ class BibleApp : Application() {
             cacheBooksDs,
             booksCloudMapper,
             booksCacheMapper,
+        )
+
+        val booksInteractor: BooksInteractor = TODO()
+
+        mainViewModel = MainViewModel(
+            booksInteractor,
+            BaseBooksDomainToUiMapper(BooksCommunication.Base(), ResourcesProvider.Base(this))
         )
     }
 

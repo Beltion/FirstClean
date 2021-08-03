@@ -1,14 +1,11 @@
 package com.gmail.olegbeltion.firstclean.data
 
-import com.gmail.olegbeltion.firstclean.core.Book
 import com.gmail.olegbeltion.firstclean.data.cache.BooksCacheDataSource
 import com.gmail.olegbeltion.firstclean.data.cache.BooksCacheMapper
 
 interface BooksRepository {
 
     suspend fun fetchBooks(): BooksData
-
-
 
     class Base(
         private val cloudBooksDs: BooksCloudDataSource,
