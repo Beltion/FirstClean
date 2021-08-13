@@ -2,7 +2,6 @@ package com.gmail.olegbeltion.firstclean
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.olegbeltion.firstclean.core.BibleApp
 import com.gmail.olegbeltion.firstclean.presentation.BibleAdapter
@@ -17,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val adapter = BibleAdapter()
         recyclerView.adapter = adapter
-
         viewModel.observe(this, {
             adapter.update(it)
         })

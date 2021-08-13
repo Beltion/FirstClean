@@ -19,7 +19,7 @@ sealed class BooksUi : Abstract.Object<Unit, Abstract.Mapper.Empty>() {
         private val resourcesProvider: ResourcesProvider
     ) : BooksUi() {
         override fun map(mapper: Abstract.Mapper.Empty) {
-            val msgId = when(errorType){ // TODO: 03.08.2021 move to other classs
+            val msgId = when(errorType){ // TODO: 03.08.2021 move to other class
                 ErrorType.NO_CONNECTION -> R.string.no_connection_msg
                 ErrorType.SERVICE_UNAVAILABLE -> R.string.services_unavailable
                 else -> R.string.something_went_wrong

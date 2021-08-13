@@ -10,11 +10,13 @@ import com.gmail.olegbeltion.firstclean.data.cache.BooksCacheMapper
 import com.gmail.olegbeltion.firstclean.data.cache.RealmProvider
 import com.gmail.olegbeltion.firstclean.data.net.BookCloudMapper
 import com.gmail.olegbeltion.firstclean.data.net.BookServices
+import com.gmail.olegbeltion.firstclean.domain.BaseBooksDataToDomainMapper
 import com.gmail.olegbeltion.firstclean.domain.BaseBooksDomainToUiMapper
 import com.gmail.olegbeltion.firstclean.domain.BooksInteractor
 import com.gmail.olegbeltion.firstclean.presentation.BooksCommunication
 import com.gmail.olegbeltion.firstclean.presentation.MainViewModel
 import com.gmail.olegbeltion.firstclean.presentation.ResourcesProvider
+import io.realm.Realm
 import retrofit2.Retrofit
 
 class BibleApp : Application() {
@@ -28,6 +30,7 @@ class BibleApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        Realm.init(this)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -46,12 +49,13 @@ class BibleApp : Application() {
             booksCloudMapper,
             booksCacheMapper,
         )
-
-        val booksInteractor: BooksInteractor = TODO()
+        val communication = BooksCommunication.Base()
+        val booksInteractor = BooksInteractor.Base(booksRepository,  BaseBooksDataToDomainMapper())
 
         mainViewModel = MainViewModel(
             booksInteractor,
-            BaseBooksDomainToUiMapper(BooksCommunication.Base(), ResourcesProvider.Base(this))
+            BaseBooksDomainToUiMapper(communication, ResourcesProvider.Base(this)),
+            communication
         )
     }
 

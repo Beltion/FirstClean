@@ -1,4 +1,4 @@
-package com.gmail.olegbeltion.firstclean.data.net
+package com.gmail.olegbeltion.firstclean.data
 
 import com.gmail.olegbeltion.firstclean.core.Abstract
 import com.gmail.olegbeltion.firstclean.core.Book

@@ -1,6 +1,5 @@
 package com.gmail.olegbeltion.firstclean.presentation
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer

@@ -30,8 +30,9 @@ class BibleAdapter : RecyclerView.Adapter<BibleAdapter.BibleViewHolder>() {
     override fun getItemCount() = books.size
 
     inner class BibleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         fun bind(book: Book) {
-            itemView.findViewById<TextView>(R.id.textView)
+            itemView.findViewById<TextView>(R.id.textView).text = book.name
         }
     }
 }
