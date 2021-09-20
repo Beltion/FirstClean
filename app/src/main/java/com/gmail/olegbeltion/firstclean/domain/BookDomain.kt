@@ -1,24 +1,9 @@
 package com.gmail.olegbeltion.firstclean.domain
 
 import com.gmail.olegbeltion.firstclean.core.Abstract
-import com.gmail.olegbeltion.firstclean.core.Book
-import com.gmail.olegbeltion.firstclean.presentation.BooksUi
-import retrofit2.HttpException
-import java.net.UnknownHostException
+import com.gmail.olegbeltion.firstclean.presentation.BookUi
 
-sealed class BookDomain : Abstract.Object<BooksUi, BooksDomainToUiMapper>() {
-    class Success(private val books: List<Book>) : BookDomain() {
-        override fun map(mapper: BooksDomainToUiMapper) = mapper.map(books)
-    }
-
-    class Fail(private val e: Exception) : BookDomain() {
-        override fun map(mapper: BooksDomainToUiMapper) = mapper.map(
-            when (e) {
-                is UnknownHostException -> ErrorType.NO_CONNECTION
-                is HttpException -> ErrorType.SERVICE_UNAVAILABLE
-                else -> ErrorType.GENERIC_ERROR
-            }
-        )
-    }
-
+class BookDomain(private val id: Int,
+                 private val name: String): Abstract.Object<BookUi, BookDomainToUiMapper> {
+    override fun map(mapper: BookDomainToUiMapper) = mapper.map(id, name)
 }

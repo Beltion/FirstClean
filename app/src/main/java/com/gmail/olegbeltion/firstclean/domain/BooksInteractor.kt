@@ -4,7 +4,7 @@ import com.gmail.olegbeltion.firstclean.data.BooksRepository
 import com.gmail.olegbeltion.firstclean.data.BooksDataToDomainMapper
 
 interface BooksInteractor {
-    suspend fun fetchBooks(): BookDomain
+    suspend fun fetchBooks(): BooksDomain
 
     class Base(
         private val booksRepository: BooksRepository,

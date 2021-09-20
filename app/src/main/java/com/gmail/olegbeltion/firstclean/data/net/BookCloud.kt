@@ -1,11 +1,12 @@
 package com.gmail.olegbeltion.firstclean.data.net
 
 import com.gmail.olegbeltion.firstclean.core.Abstract
-import com.gmail.olegbeltion.firstclean.core.Book
+import com.gmail.olegbeltion.firstclean.data.BookData
+import com.gmail.olegbeltion.firstclean.data.ToBookMapper
 
 data class BookCloud(
     private val id: Int = -1,
     private val name: String = ""
-) : Abstract.Object<Book, BookCloudMapper>() {
-    override fun map(mapper: BookCloudMapper) = mapper.map(id, name)
+) : Abstract.Object<BookData, ToBookMapper> {
+    override fun map(mapper: ToBookMapper) = mapper.map(id, name)
 }

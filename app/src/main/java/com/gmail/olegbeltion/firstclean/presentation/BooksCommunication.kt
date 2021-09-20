@@ -3,34 +3,22 @@ package com.gmail.olegbeltion.firstclean.presentation
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.gmail.olegbeltion.firstclean.core.Book
+import com.gmail.olegbeltion.firstclean.core.Abstract
 
-interface BooksCommunication {
-    fun show(books: List<Book>)
-    fun show(message: String)
-
-    fun observeSuccess(owner: LifecycleOwner, observer: Observer<List<Book>>)
-    fun observeFail(owner: LifecycleOwner, observer: Observer<String>)
+interface BooksCommunication : Abstract.Mapper{
+    fun map(books: List<BookUi>)
+    fun observe(owner: LifecycleOwner, observer: Observer<List<BookUi>>)
 
     class Base: BooksCommunication {
-        private val successLiveData = MutableLiveData<List<Book>>()
-        private val failLiveData = MutableLiveData<String>()
+        private val bookListLiveData = MutableLiveData<List<BookUi>>()
 
-        override fun show(books: List<Book>) {
-            successLiveData.value = books
+        override fun map(books: List<BookUi>) {
+            bookListLiveData.value = books
         }
 
-        override fun show(message: String) {
-            failLiveData.value = message
-        }
 
-        override fun observeSuccess(owner: LifecycleOwner, observer: Observer<List<Book>>) {
-            successLiveData.observe(owner,observer)
+        override fun observe(owner: LifecycleOwner, observer: Observer<List<BookUi>>) {
+            bookListLiveData.observe(owner,observer)
         }
-
-        override fun observeFail(owner: LifecycleOwner, observer: Observer<String>) {
-            failLiveData.observe(owner,observer)
-        }
-
     }
 }
