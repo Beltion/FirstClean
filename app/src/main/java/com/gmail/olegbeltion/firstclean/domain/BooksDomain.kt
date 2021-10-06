@@ -12,9 +12,26 @@ sealed class BooksDomain : Abstract.Object<BooksUi, BooksDomainToUiMapper> {
         private val books: List<BookData>,
         private val bookMapper: BookDataToDomainMapper
     ) : BooksDomain() {
-        override fun map(mapper: BooksDomainToUiMapper) = mapper.map(books.map {
-            it.map(bookMapper)
-        })
+        override fun map(mapper: BooksDomainToUiMapper): BooksUi {
+            val data = mutableListOf<BookDomain>()
+            val ot = "OT"
+            val nt = "NT"
+            var testament = ""
+            books.forEach { bookData ->
+                if (!bookData.compare(testament)) {
+                    if (testament.isEmpty())
+                        data.add(BookDomain.Testament(TestamentType.OLD))
+                    else
+                        data.add(BookDomain.Testament(TestamentType.NEW))
+                    testament = bookData.getTestament()
+                }
+                data.add(bookData.map(bookMapper))
+            }
+
+
+
+            return mapper.map(data)
+        }
     }
 
     class Fail(private val e: Exception) : BooksDomain() {
