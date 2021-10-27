@@ -4,4 +4,6 @@
     <string name="services_unavailable">Services unavailable</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="try_again">Try again</string>
+    <string name="old_testament">Thes Old Tesatament</string>
+    <string name="new_testament">The New Testament</string>
 </resources>

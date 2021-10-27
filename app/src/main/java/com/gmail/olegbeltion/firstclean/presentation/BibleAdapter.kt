@@ -23,6 +23,7 @@ class BibleAdapter(private val retry: Retry) : RecyclerView.Adapter<BibleAdapter
         is BookUi.Fail -> 1
         is BookUi.Testament -> 2
         is BookUi.Progress -> 3
+        else -> -1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {

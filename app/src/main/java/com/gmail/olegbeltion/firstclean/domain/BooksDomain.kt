@@ -3,6 +3,7 @@ package com.gmail.olegbeltion.firstclean.domain
 import com.gmail.olegbeltion.firstclean.core.Abstract
 import com.gmail.olegbeltion.firstclean.data.BookData
 import com.gmail.olegbeltion.firstclean.data.BookDataToDomainMapper
+import com.gmail.olegbeltion.firstclean.data.TestamentTemp
 import com.gmail.olegbeltion.firstclean.presentation.BooksUi
 import retrofit2.HttpException
 import java.net.UnknownHostException
@@ -16,14 +17,14 @@ sealed class BooksDomain : Abstract.Object<BooksUi, BooksDomainToUiMapper> {
             val data = mutableListOf<BookDomain>()
             val ot = "OT"
             val nt = "NT"
-            var testament = ""
+            val temp = TestamentTemp.Base()
             books.forEach { bookData ->
-                if (!bookData.compare(testament)) {
-                    if (testament.isEmpty())
+                if (!bookData.compare(temp)) {
+                    if (temp.isEmpty())
                         data.add(BookDomain.Testament(TestamentType.OLD))
                     else
                         data.add(BookDomain.Testament(TestamentType.NEW))
-                    testament = bookData.getTestament()
+                    bookData.saveTestament(temp)
                 }
                 data.add(bookData.map(bookMapper))
             }

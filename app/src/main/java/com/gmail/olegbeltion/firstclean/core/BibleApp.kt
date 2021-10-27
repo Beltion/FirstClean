@@ -67,9 +67,10 @@ class BibleApp : Application() {
             BaseBookDataToDomainMapper()
         ))
 
+        val resourcesProvider = ResourcesProvider.Base(this)
         mainViewModel = MainViewModel(
             booksInteractor,
-            BaseBooksDomainToUiMapper(ResourcesProvider.Base(this), BaseBookDomainToUiMapper()),
+            BaseBooksDomainToUiMapper(resourcesProvider, BaseBookDomainToUiMapper(resourcesProvider)),
             communication
         )
     }
