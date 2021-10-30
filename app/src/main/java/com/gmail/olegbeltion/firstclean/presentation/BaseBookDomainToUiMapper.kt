@@ -6,12 +6,12 @@ import com.gmail.olegbeltion.firstclean.domain.TestamentType
 
 class BaseBookDomainToUiMapper(private val resourcesProvider: ResourcesProvider) :
     BookDomainToUiMapper {
-    override fun map(id: Int, name: String) = when (id) {
-        TestamentType.OLD.getId() ->
+    override fun map(id: Int, name: String) = when {
+        TestamentType.OLD.matches(id) ->
             BookUi.Testament(
                 id, resourcesProvider.getString(R.string.old_testament)
             )
-        TestamentType.NEW.getId() ->
+        TestamentType.NEW.matches(id) ->
             BookUi.Testament(
                 id, resourcesProvider.getString(R.string.new_testament)
             )

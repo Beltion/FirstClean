@@ -7,4 +7,5 @@
     android:background="@color/purple_200"
     android:textAlignment="center"
     android:textColor="@color/white"
+    android:padding="@dimen/padding8"
     tools:text="Genesis" />

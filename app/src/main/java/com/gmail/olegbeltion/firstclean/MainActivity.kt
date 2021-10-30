@@ -1,7 +1,8 @@
 package com.gmail.olegbeltion.firstclean
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.olegbeltion.firstclean.core.BibleApp
 import com.gmail.olegbeltion.firstclean.presentation.BibleAdapter
@@ -15,13 +16,14 @@ class MainActivity : AppCompatActivity() {
         val viewModel = (application as BibleApp).mainViewModel
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter = BibleAdapter(object : Retry{
+        val adapter = BibleAdapter(object : Retry {
             override fun tryAgain() {
                 viewModel.fetchBooks()
             }
 
         })
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         viewModel.observe(this, {
             adapter.update(it)

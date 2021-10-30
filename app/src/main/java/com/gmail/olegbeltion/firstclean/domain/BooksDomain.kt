@@ -19,7 +19,7 @@ sealed class BooksDomain : Abstract.Object<BooksUi, BooksDomainToUiMapper> {
             val nt = "NT"
             val temp = TestamentTemp.Base()
             books.forEach { bookData ->
-                if (!bookData.compare(temp)) {
+                if (!bookData.matches(temp)) {
                     if (temp.isEmpty())
                         data.add(BookDomain.Testament(TestamentType.OLD))
                     else

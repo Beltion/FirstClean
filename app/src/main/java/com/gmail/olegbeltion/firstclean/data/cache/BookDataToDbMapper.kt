@@ -1,16 +1,14 @@
 package com.gmail.olegbeltion.firstclean.data.cache
 
 import com.gmail.olegbeltion.firstclean.core.Abstract
-import io.realm.Realm
 
 interface BookDataToDbMapper: Abstract.Mapper {
-    fun map(id: Int, name: String, testament: String, realm: Realm): BookDb
+    fun mapToDb(id: Int, name: String, db: DbWrapper): BookDb
 
-    class Base: BookDataToDbMapper{
-        override fun map(id: Int, name: String, testament: String, realm: Realm): BookDb {
-            val bookDb = realm.createObject(BookDb::class.java, id)
+    class Base: BookDataToDbMapper {
+        override fun mapToDb(id: Int, name: String,db: DbWrapper): BookDb {
+            val bookDb = db.createObject(id)
             bookDb.name = name
-            bookDb.testament = testament
             return bookDb
         }
 
