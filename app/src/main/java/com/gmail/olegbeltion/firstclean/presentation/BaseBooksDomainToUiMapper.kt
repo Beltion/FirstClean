@@ -11,17 +11,17 @@ class BaseBooksDomainToUiMapper(
     private val bookMapper: BookDomainToUiMapper
 ) :
     BooksDomainToUiMapper {
-    override fun map(books: List<BookDomain>) = BooksUi.Success(books.map {
+    override fun map(books: List<BookDomain>) = BooksUi.Base(books.map {
         it.map(bookMapper)
     })
 
-    override fun map(errorType: ErrorType): BooksUi.Fail {
+    override fun map(errorType: ErrorType): BooksUi.Base {
         val msgId = when (errorType) {
             ErrorType.NO_CONNECTION -> R.string.no_connection_msg
             ErrorType.SERVICE_UNAVAILABLE -> R.string.services_unavailable
             else -> R.string.something_went_wrong
         }
         val msg = resourcesProvider.getString(msgId)
-        return BooksUi.Fail(msg)
+        return BooksUi.Base(listOf(BookUi.Fail(msg)))
     }
 }
