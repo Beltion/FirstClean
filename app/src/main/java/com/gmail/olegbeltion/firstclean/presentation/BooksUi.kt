@@ -7,27 +7,13 @@ import com.gmail.olegbeltion.firstclean.domain.BookDomainToUiMapper
 import com.gmail.olegbeltion.firstclean.domain.ErrorType
 
 sealed class BooksUi : Abstract.Object<Unit, BooksCommunication> {
-    class Success(private val books: List<BookDomain>, private val bookMapper: BookDomainToUiMapper) : BooksUi() {
-        override fun map(mapper: BooksCommunication) {
-            val booksUi = books.map {
-                 it.map(bookMapper)
-            }
-            mapper.map(booksUi)
-        }
+    data class Success(private val books: List<BookUi>) : BooksUi() {
+        override fun map(mapper: BooksCommunication) = mapper.map(books)
     }
 
-    class Fail(
-        private val errorType: ErrorType,
-        private val resourcesProvider: ResourcesProvider
+    data class Fail(
+        private val errorMsg: String
     ) : BooksUi() {
-        override fun map(mapper: BooksCommunication) {
-            val msgId = when (errorType) {
-                ErrorType.NO_CONNECTION -> R.string.no_connection_msg
-                ErrorType.SERVICE_UNAVAILABLE -> R.string.services_unavailable
-                else -> R.string.something_went_wrong
-            }
-            val msg = resourcesProvider.getString(msgId)
-            mapper.map(listOf(BookUi.Fail(msg)))
-        }
+        override fun map(mapper: BooksCommunication) = mapper.map(listOf(BookUi.Fail(errorMsg)))
     }
 }
